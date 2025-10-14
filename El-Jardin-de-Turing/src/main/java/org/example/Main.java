@@ -4,8 +4,9 @@ import javax.swing.*;
 
 public class Main {
 
-    private static final int CAPAS = 200; // la 100 es la principal las otras son superiores o inferiores
-    private static final int COLUMNAS = 50, FILAS = 50, CAPA_A_MOSTRAR = 100;
+    // crear metodo para defenir en un solo sitio todos los iconos y asignaciones
+    private static final int CAPAS = 201; // la 100 es la principal las otras son superiores o inferiores
+    private static final int COLUMNAS = 50, FILAS = 50, CAPA_A_MOSTRAR = 100; // 50x50=2500 posiciones ha usar
 
     public static void main(String[] args) {
         // 1. Crear el modelo de datos
