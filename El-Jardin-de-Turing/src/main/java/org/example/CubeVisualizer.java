@@ -1,17 +1,19 @@
 package org.example;
 
 import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.NumberFormat;
 
 public class CubeVisualizer extends JFrame implements KeyListener {
 
     private final CubePanel cubePanel;
     private int currentLayer;
     private final int totalLayers;
-    private final JTextField layerTextField;
+    private final JFormattedTextField layerTextField;
     private final String[][][] cubeData;
 
     public CubeVisualizer(String[][][] cubeData, int layerToShow) {
@@ -44,7 +46,18 @@ public class CubeVisualizer extends JFrame implements KeyListener {
         // Panel para ir a una capa específica
         JPanel goToPanel = new JPanel();
         goToPanel.add(new JLabel("Ir a capa:"));
-        layerTextField = new JTextField(String.valueOf(currentLayer), 5);
+
+        NumberFormat format = NumberFormat.getIntegerInstance();
+        NumberFormatter formatter = new NumberFormatter(format);
+        formatter.setValueClass(Integer.class);
+        formatter.setAllowsInvalid(false); // No permite caracteres no válidos
+        formatter.setMinimum(0);
+        formatter.setMaximum(totalLayers - 1);
+
+        layerTextField = new JFormattedTextField(formatter);
+        layerTextField.setValue(currentLayer);
+        layerTextField.setColumns(5);
+
         layerTextField.addActionListener(this::goToLayerFromTextField);
         goToPanel.add(layerTextField);
         menuBar.add(goToPanel);
@@ -67,18 +80,20 @@ public class CubeVisualizer extends JFrame implements KeyListener {
             currentLayer = newLayer;
             setTitle("Visualización del Cubo - Capa " + currentLayer);
             cubePanel.setCurrentLayer(currentLayer);
-            layerTextField.setText(String.valueOf(currentLayer));
+            layerTextField.setValue(currentLayer);
+            requestFocusInWindow(); // Devolver el foco a la ventana principal
         }
     }
 
     private void goToLayerFromTextField(ActionEvent e) {
         try {
-            int layer = Integer.parseInt(layerTextField.getText());
+            int layer = (int) layerTextField.getValue();
             changeLayer(layer);
-        } catch (NumberFormatException ex) {
-            // Si el texto no es un número válido, lo restauramos al valor actual
-            layerTextField.setText(String.valueOf(currentLayer));
+        } catch (Exception ex) {
+            // Si hay un error, restauramos al valor actual
+            layerTextField.setValue(currentLayer);
         }
+        requestFocusInWindow(); // Devolver el foco a la ventana principal
     }
 
     @Override
