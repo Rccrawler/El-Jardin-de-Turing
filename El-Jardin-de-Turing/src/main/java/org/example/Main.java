@@ -19,6 +19,8 @@ public class Main {
         SectorWorld sectorWorld2 = new SectorWorld(CAPAS, COLUMNAS, FILAS);
 
         sectorWorld1.llenarCubo();
+        sectorWorld1.PostEspawnCreador();
+
         sectorWorld2.llenarCubo();
 
         // 2. Ejecutar la creación de la GUI en el Event Dispatch Thread (EDT)

@@ -96,6 +96,10 @@ public class SectorWorld {
         }
     }
 
+    public void PostEspawnCreador(){
+        cuadricula3d[(int)(this.capas / 2)][25][25] = "Ω";
+    }
+
     public String[][][] getCuboData() {
         return cuadricula3d;
     }
@@ -111,6 +115,7 @@ public class SectorWorld {
     public int getFilas() {
         return filas;
     }
+
 }
 
 

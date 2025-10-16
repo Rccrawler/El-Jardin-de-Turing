@@ -1,9 +1,9 @@
 package org.example;
 
 public class ObjetoPropiedades { // guardar ha qui las propiededes de los objetos
-    private int z;
-    private int x;
-    private int y;
+    private int z = 0;
+    private int x = 0;
+    private int y = 0;
     private String tipo;
     private int dureza;
     private boolean irronpibilidad = false;
