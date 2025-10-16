@@ -30,3 +30,23 @@ public class Main {
         });
     }
 }
+
+
+/*
+// Crear un nuevo personaje
+PersonajesPropiedades personaje1 = new PersonajesPropiedades(1.0); // Por ejemplo, 1.0 para masculino
+
+// Crear dos objetos
+ObjetoPropiedades espada = new ObjetoPropiedades(0, 0, 0, "espada", 10, true);
+ObjetoPropiedades escudo = new ObjetoPropiedades(0, 0, 0, "escudo", 15, true);
+
+// Asignar los objetos al personaje
+personaje1.agregarObjeto(espada);
+personaje1.agregarObjeto(escudo);
+
+// Para identificar al personaje, puedes usar:
+int idDelPersonaje = personaje1.getPersonajeId(); // Obtendrá 1
+
+// Para ver los objetos que tiene el personaje:
+List<ObjetoPropiedades> objetosDelPersonaje = personaje1.getObjetos();
+* */
