@@ -1,6 +1,8 @@
 package org.example;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreadorController { // movimiento exclusibo del creador
 
@@ -53,9 +55,22 @@ public class CreadorController { // movimiento exclusibo del creador
         // Verificar si la nueva posición es válida
         if (newX >= 0 && newX < cubeData[currentLayer][0].length && newY >= 0 && newY < cubeData[currentLayer].length) {
             // Mover el creador
-            cubeData[currentLayer][creatorY][creatorX] = "·"; // Dejar el espacio anterior
-            cubeData[currentLayer][newY][newX] = "Ω"; // Mover a la nueva posición
-            cubePanel.repaint(); // Repintar el panel para mostrar el cambio
+            if(cubeData[currentLayer][newY][newX].equals(" ")){ // si no hay obstaculos deja moberse
+                cubeData[currentLayer][creatorY][creatorX] = " "; // Dejar el espacio anterior
+                cubeData[currentLayer][newY][newX] = "Ω"; // Mover a la nueva posición
+                CreadorPropiedades creador = CreadorPropiedades.getInstance();
+                creador.setZ(currentLayer);
+                creador.setX(newX);
+                creador.setY(newY);
+                cubePanel.repaint(); // Repintar el panel para mostrar el cambio
+                System.out.println();
+                System.out.println("creador movido a "+ currentLayer + " " + newY + " " + newX);
+                System.out.println("-----------------------------");
+            }else {
+                System.out.println(); // si hay estaculos no deja moberse
+                System.out.println("no puede moberse colisionaria");
+                System.out.println("-----------------------------");
+            }
         }
     }
 }

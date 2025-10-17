@@ -19,6 +19,7 @@ public class Main {
         SectorWorld sectorWorld2 = new SectorWorld(CAPAS, COLUMNAS, FILAS);
 
         sectorWorld1.llenarCubo();
+        CreadorPropiedades creador = CreadorPropiedades.getInstance(true, 20, "programador", 100, 0, 0, 0);
         sectorWorld1.PostEspawnCreador();
 
         sectorWorld2.llenarCubo();

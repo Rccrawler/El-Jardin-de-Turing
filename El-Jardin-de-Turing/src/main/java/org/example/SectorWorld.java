@@ -97,7 +97,24 @@ public class SectorWorld {
     }
 
     public void PostEspawnCreador(){
-        cuadricula3d[(int)(this.capas / 2)][(int)(this.filas / 2)][(int)(this.columnas / 2)] = "Ω";
+
+        int z = ((int)(this.capas / 2));
+        int x = ((int)(this.columnas / 2));
+        int y = ((int)(this.filas / 2));
+
+        // Coloca el ícono en la cuadrícula
+        cuadricula3d[z][x][y] = "Ω";
+
+        // Obtiene la instancia del Creador y registra (set) sus coordenadas
+        try {
+            CreadorPropiedades creador = CreadorPropiedades.getInstance();
+            creador.setZ(z);
+            creador.setX(x);
+            creador.setY(y);
+        } catch (IllegalStateException e) {
+            System.err.println("Error: El Creador no ha sido inicializado antes de llamar a PostEspawnCreador.");
+            // Aquí podrías inicializarlo si es necesario, pero lo ideal es que se cree antes.
+        }
     }
 
     public String[][][] getCuboData() {
