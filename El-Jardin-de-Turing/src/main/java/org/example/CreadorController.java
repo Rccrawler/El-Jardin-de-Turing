@@ -8,10 +8,12 @@ public class CreadorController { // movimiento exclusibo del creador
 
     private final String[][][] cubeData;
     private final CubePanel cubePanel;
+    private final InventoryPanel inventoryPanel;
 
-    public CreadorController(String[][][] cubeData, CubePanel cubePanel) {
+    public CreadorController(String[][][] cubeData, CubePanel cubePanel, InventoryPanel inventoryPanel) {
         this.cubeData = cubeData;
         this.cubePanel = cubePanel;
+        this.inventoryPanel = inventoryPanel;
     }
 
     public void move(int keyCode, int currentLayer) {
@@ -54,8 +56,8 @@ public class CreadorController { // movimiento exclusibo del creador
 
         // Verificar si la nueva posición es válida
         if (newX >= 0 && newX < cubeData[currentLayer][0].length && newY >= 0 && newY < cubeData[currentLayer].length) {
-            // Mover el creador
-            if(cubeData[currentLayer][newY][newX].equals(" ")){ // si no hay obstaculos deja moberse
+            String destination = cubeData[currentLayer][newY][newX];
+            if (destination.equals(" ")) { // si no hay obstaculos deja moberse
                 cubeData[currentLayer][creatorY][creatorX] = " "; // Dejar el espacio anterior
                 cubeData[currentLayer][newY][newX] = "Ω"; // Mover a la nueva posición
                 CreadorPropiedades creador = CreadorPropiedades.getInstance();
@@ -66,7 +68,24 @@ public class CreadorController { // movimiento exclusibo del creador
                 System.out.println();
                 System.out.println("creador movido a "+ currentLayer + " " + newY + " " + newX);
                 System.out.println("-----------------------------");
-            }else {
+            } else if (destination.equals("o")) { // 'o' representa un objeto
+                // Lógica para recoger el objeto
+                CreadorPropiedades creador = CreadorPropiedades.getInstance();
+                // Suponemos que el objeto es una espada por ahora, esto debería ser más dinámico
+                ObjetoPropiedades objeto = new ObjetoPropiedades(0, 0, 0, "espada", 10, true);
+                if (creador.agregarObjeto(objeto)) {
+                    cubeData[currentLayer][creatorY][creatorX] = " "; // Dejar el espacio anterior
+                    cubeData[currentLayer][newY][newX] = "Ω"; // Mover a la nueva posición
+                    creador.setZ(currentLayer);
+                    creador.setX(newX);
+                    creador.setY(newY);
+                    cubePanel.repaint();
+                    inventoryPanel.repaint(); // Repintar el inventario
+                    System.out.println("Objeto recogido!");
+                } else {
+                    System.out.println("Inventario lleno!");
+                }
+            } else {
                 System.out.println(); // si hay estaculos no deja moberse
                 System.out.println("no puede moberse colisionaria");
                 System.out.println("-----------------------------");
@@ -74,4 +93,3 @@ public class CreadorController { // movimiento exclusibo del creador
         }
     }
 }
-

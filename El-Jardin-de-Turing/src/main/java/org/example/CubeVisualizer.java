@@ -16,6 +16,7 @@ public class CubeVisualizer extends JFrame implements KeyListener {
     private final JFormattedTextField layerTextField;
     private final String[][][] cubeData;
     private final CreadorController creadorController;
+    private final InventoryPanel inventoryPanel;
 
     public CubeVisualizer(String[][][] cubeData, int layerToShow) {
         super("Visualización del Cubo - Capa " + layerToShow);
@@ -29,7 +30,10 @@ public class CubeVisualizer extends JFrame implements KeyListener {
         cubePanel = new CubePanel(cubeData, layerToShow);
         add(cubePanel, BorderLayout.CENTER);
 
-        creadorController = new CreadorController(cubeData, cubePanel);
+        inventoryPanel = new InventoryPanel();
+        add(inventoryPanel, BorderLayout.NORTH);
+
+        creadorController = new CreadorController(cubeData, cubePanel, inventoryPanel);
 
         // Crear y configurar el menú
         JMenuBar menuBar = new JMenuBar();

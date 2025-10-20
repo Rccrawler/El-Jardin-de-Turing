@@ -22,6 +22,9 @@ public class Main {
         CreadorPropiedades creador = CreadorPropiedades.getInstance(true, 20, "programador", 100, 0, 0, 0);
         sectorWorld1.PostEspawnCreador();
 
+        // Añadir un objeto de prueba
+        // sectorWorld1.getCuboData()[100][25][26] = "o";
+
         sectorWorld2.llenarCubo();
 
         // 2. Ejecutar la creación de la GUI en el Event Dispatch Thread (EDT)
@@ -29,6 +32,8 @@ public class Main {
             CubeVisualizer visualizer = new CubeVisualizer(sectorWorld1.getCuboData(), CAPA_A_MOSTRAR);
             visualizer.setVisible(true);
         });
+
+        //melodia.melodiaTaller();
     }
 }
 
