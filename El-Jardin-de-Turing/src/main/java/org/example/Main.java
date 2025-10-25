@@ -21,6 +21,7 @@ public class Main {
         sectorWorld1.llenarCubo();
         CreadorPropiedades creador = CreadorPropiedades.getInstance(true, 20, "programador", 100, 0, 0, 0);
         sectorWorld1.PostEspawnCreador();
+        sectorWorld1.SetObjeto("\uD83D\uDC51", 20,20);
 
         // Añadir un objeto de prueba
         // sectorWorld1.getCuboData()[100][25][26] = "o";
@@ -39,6 +40,7 @@ public class Main {
 
 
 /*
+
 // Crear un nuevo personaje
 PersonajesPropiedades personaje1 = new PersonajesPropiedades(1.0); // Por ejemplo, 1.0 para masculino
 

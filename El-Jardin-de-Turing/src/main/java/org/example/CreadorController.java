@@ -52,6 +52,7 @@ public class CreadorController { // movimiento exclusibo del creador
             case KeyEvent.VK_D:
                 newX++;
                 break;
+            case KeyEvent.VK_Q:;
         }
 
         // Verificar si la nueva posición es válida

@@ -117,6 +117,12 @@ public class SectorWorld {
         }
     }
 
+    public void SetObjeto(String objeto, int cordenadaX, int cordenadaY){
+        int capa = ((int)(this.capas / 2));
+        cuadricula3d[capa][cordenadaX][cordenadaY] = objeto; //poner hobjeto en el mapa
+        objetos.add(new ObjetoPropiedades(capa, cordenadaX, cordenadaY, objeto, 100, true)); // hareglar esto cada objeto tiene qu etener una durez predefinida
+    }
+
     public String[][][] getCuboData() {
         return cuadricula3d;
     }
