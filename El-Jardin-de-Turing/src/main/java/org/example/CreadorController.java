@@ -10,6 +10,9 @@ public class CreadorController { // movimiento exclusibo del creador
     private final CubePanel cubePanel;
     private final InventoryPanel inventoryPanel;
 
+    private int posicionUltimaX;
+    private int posicionUltimaY;
+
     public CreadorController(String[][][] cubeData, CubePanel cubePanel, InventoryPanel inventoryPanel) {
         this.cubeData = cubeData;
         this.cubePanel = cubePanel;
@@ -52,7 +55,14 @@ public class CreadorController { // movimiento exclusibo del creador
             case KeyEvent.VK_D:
                 newX++;
                 break;
-            case KeyEvent.VK_Q:;
+            case KeyEvent.VK_Q: // cojer con la mano izquierda el objeto cecano
+                cogerObjeto.cojerObjetoCercano(true, newX, newY); // enviar coredenadas
+                System.out.println("CreadorController: coger objeto con la mano izquierda");
+                break;
+            case KeyEvent.VK_E: // cojer con la mano derecha el objeto cercano
+                cogerObjeto.cojerObjetoCercano(false, newX, newY); // enviar coredenadas
+                System.out.println("CreadorController: coger objeto con la mano derecha");
+                break;
         }
 
         // Verificar si la nueva posición es válida
@@ -80,6 +90,8 @@ public class CreadorController { // movimiento exclusibo del creador
                     creador.setZ(currentLayer);
                     creador.setX(newX);
                     creador.setY(newY);
+                    this.posicionUltimaX = newX;
+                    this.posicionUltimaY = newY;
                     cubePanel.repaint();
                     inventoryPanel.repaint(); // Repintar el inventario
                     System.out.println("Objeto recogido!");
